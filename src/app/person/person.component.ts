@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
+declare var $: any;
 
 @Component({
   selector: 'app-person',
@@ -29,6 +30,8 @@ export class PersonComponent implements OnInit {
   ageNumberSort(){
     this.data = this.data.sort(function(a, b){return a.Age - b.Age});
   }
+
+
   
   country: any = [
     { Name: '', Id: 0 },
@@ -746,10 +749,24 @@ export class PersonComponent implements OnInit {
   //
   backupData = this.data; //Backup after slicing
   totalRecord = this.data.length;
-  size = 4;
+  size = 15;
   page = 1;
   start = 0;
   end = this.size;
+  personModify: any = {
+    Name: null,
+    Age: null,
+    Country: null,
+    Address: null,
+    Married: null,
+  }
+  personCreate: any = {
+    Name: null,
+    Age: null,
+    Country: null,
+    Address: null,
+    Married: false,
+  }
   totalPage = this.totalRecord % this.size == 0 ? this.totalRecord / this.size : this.totalRecord / this.size + 1;
   pagination(start, end){
     this.data = this.data.slice(this.start, this.end);
@@ -782,5 +799,26 @@ export class PersonComponent implements OnInit {
       this.page--;
       this.movePage(this.page);
     }
+  }
+  createUser(){
+    if(this.personCreate.Name == null ||
+      this.personCreate.Age == null ||
+      this.personCreate.Country == null ||
+      this.personCreate.Address == null){
+        alert("Full fill in mandatory fields.");
+      }
+    else{
+      //Push data after backup
+      this.backupData.push(this.personCreate);
+      //Reset data after creating new person
+      this.data = this.backupData;
+      //Fill page
+      this.movePage(this.page);
+      alert("Create person success.");
+    }
+  }
+  openPersonModal(index){
+    this.personModify = this.data[index];
+    $('#personModal').modal('show');
   }
 }
