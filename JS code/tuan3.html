@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="Week3.css">
+</head>
+
+<body onload="init()">
+
+    <div class="container">
+        <table class="table-customer">
+            <tr class="row row-head"></tr>
+            <th class="col col-head id-Name">Name</th>
+            <th class="col col-head id-Age">Age</th>
+            <th class="col col-head id-Address">Address</th>
+            <th class="col col-head id-Country">Country</th>
+            <th class="col col-head id-Married">Is Married</th>
+            <th class="col col-head id-Action">
+                <span>&#128269;</span>
+            </th>
+            <tr class="row row-search"></tr>
+            <tbody id="data-field"></tbody>
+        </table>
+        <div class="pagination">
+            <a href="javascript:void(0)" id="pre-page" style="margin-right: 10px;" (click)="prePage()">Previous</a>
+            <a href="javascript:void(0)" id="next-page" style="margin-left: 10px;" (click)="nextPage()">Next</a>
+        </div>
+    </div>
+    <script src="tuan3.js"></script>
+</body>
+
+<!-- <input type="text"> -->

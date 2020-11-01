@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="week3'.css">
+</head>
+
+<body onload="init()">
+    <div class="container">
+      <table class="table-customer">
+        <tr class="row row-head"></tr>
+        <tr class="row row-search"></tr>
+        <tbody id="data-field"></tbody>
+      </table>
+      <div class="pagination">
+        <label for="pagination">Pages: </label>
+        <div class="pagination-control">
+          <a class="link" href="#" id="first-page" title="Go to first">First</a>
+          <span class="page-select"></span>
+          <a class="link" href="#" id="last-page" title="Go to last">Last</a>
+        </div>
+        <span class="page-information"></span>
+        <div class="size-control">
+          <label for="input-size">Change size: </label>
+          <input class="input-control" id="input-size" type="number" title="Input record per page" min="2" max="20" />
+        </div>
+      </div>
+    </div>
+    <script src="Week3.js"></script>
+  </body>

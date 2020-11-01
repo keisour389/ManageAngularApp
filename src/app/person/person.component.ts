@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Testability } from '@angular/core';
 
 declare var $: any;
 
@@ -8,7 +8,6 @@ declare var $: any;
   styleUrls: ['./person.component.css'],
 })
 export class PersonComponent implements OnInit {
-  
   personCountryList: any = [];
   constructor() {
     //Change ID to Country name
@@ -21,14 +20,14 @@ export class PersonComponent implements OnInit {
   ngOnInit(): void {}
   changeIDToCountry(){
     let countryList = [];
-    this.data.forEach(person => {
+    this.JSONData.forEach(person => {
       this.country.forEach(variable => 
         {(variable.Id == person.Country, countryList.push(variable.Name))});
     });
     return countryList;
   }
   ageNumberSort(){
-    this.data = this.data.sort(function(a, b){return a.Age - b.Age});
+    this.JSONData = this.JSONData.sort(function(a, b){return a.Age - b.Age});
   }
 
 
@@ -44,7 +43,7 @@ export class PersonComponent implements OnInit {
     { Name: 'Russia', Id: 7 },
   ];
 
-  data = [
+  JSONData = [
     {
       Name: 'Otto Clay',
       Age: 61,
@@ -747,8 +746,8 @@ export class PersonComponent implements OnInit {
     },
   ];
   //
-  backupData = this.data; //Backup after slicing
-  totalRecord = this.data.length;
+  backupData = this.JSONData; //Backup after slicing
+  totalRecord = this.JSONData.length;
   size = 15;
   page = 1;
   start = 0;
@@ -769,11 +768,11 @@ export class PersonComponent implements OnInit {
   }
   totalPage = this.totalRecord % this.size == 0 ? this.totalRecord / this.size : this.totalRecord / this.size + 1;
   pagination(start, end){
-    this.data = this.data.slice(this.start, this.end);
+    this.JSONData = this.JSONData.slice(this.start, this.end);
   }
   movePage(cPage){
-    //Before move restore data
-    this.data = this.backupData;
+    //Before move restore JSONData
+    this.JSONData = this.backupData;
     this.start = this.size * (cPage - 1); //VD: trang 1 có size là 5 thì bắt đầu từ 5 * (1 - 1) = 0;
     this.end = (this.size * cPage); //VD: trang 1 có size là 5 thì bắt đầu từ (5 * 1) = 5; bắt đầu từ 0 và cắt tại phần tử 5
     this.pagination(this.start, this.end);
@@ -808,17 +807,17 @@ export class PersonComponent implements OnInit {
         alert("Full fill in mandatory fields.");
       }
     else{
-      //Push data after backup
+      //Push JSONData after backup
       this.backupData.push(this.personCreate);
-      //Reset data after creating new person
-      this.data = this.backupData;
+      //Reset JSONData after creating new person
+      this.JSONData = this.backupData;
       //Fill page
       this.movePage(this.page);
       alert("Create person success.");
     }
   }
   openPersonModal(index){
-    this.personModify = this.data[index];
+    this.personModify = this.JSONData[index];
     $('#personModal').modal('show');
   }
 }
